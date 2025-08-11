@@ -1,0 +1,6 @@
+dotenv
+react
+react-dom
+mysql
+jsonwebtoken
+vite
