@@ -1,9 +1,12 @@
+import React from 'react';
+import copyright from '../assets/copyright.png'
+
 const Footer = () => {
   return (
     <footer style={styles.footer}>    
-        <div>
-        <img src="../assets/copyrightsymbol.png"/>
-          <span>: Gurus of the Apocalypse</span>
+        <div style={styles.copyright}>
+          <img style={styles.copyImage} src={copyright} alt="copyright"/>
+          <span>Gurus of the Apocalypse</span>          
         </div>
         <div>
           <a href="mailto:info@apocalypse.com" className="hover-underline"><span>email: info@apocalypse.com</span></a>
@@ -22,7 +25,16 @@ const styles = {
     textAlign: 'center',
     margin: '10px',
     padding: '10px',
-  },  
+  },
+  copyright: {
+    display: 'flex',
+    flexDirection: 'horizontal',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  copyImage: {
+    height: '25px',
+    width: 'auto',  }  
 };
 
 export default Footer;
