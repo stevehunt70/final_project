@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./assets/style.css">
+  <title>Login / Register</title>
+</head>
+<body>
+  <div align="center">
+    <div class="card">
+      <h1>Login or Register</h1>
+      <form id="auth-form">
+        <div><label>Email:</label></div>
+        <div><input type="email" name="email" required></div><br>
+        <div><label>Password:</label></div>
+        <div><input type="password" name="password" required></div><br>
+        <div>
+          <button class="button-index" type="submit">login</button>
+          <button class="button-index" type="button" id="register-btn">register</button>
+        </div>
+      </form>
+      <a href="./video.html"> Go To Video Page</a>
+      <p id="message"></p>
+    </div>
+  </div>
+<!--  
+  <script>
+    const form = document.getElementById("auth-form");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.get("email"),
+          password: formData.get("password")
+        })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        localStorage.setItem("token", data.token);
+        message.textContent = "Login successful";
+        window.location.href = "recipes.html";
+      } else {
+        message.textContent = data.message;
+      }
+    });
+
+    document.getElementById("register-btn").addEventListener("click", async () => {
+      const formData = new FormData(form);
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.get("email"),
+          password: formData.get("password")
+        })
+      });
+      const data = await res.json();
+      message.textContent = data.message;
+    });
+  </script>
+
+  -->
+</body>
+</html>
