@@ -4,3 +4,4 @@ react-dom
 mysql
 jsonwebtoken
 vite
+sequelize
