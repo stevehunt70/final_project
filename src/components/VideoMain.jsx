@@ -4,7 +4,6 @@ import vm1 from '../assets/videomain1.png';
 import vm2 from '../assets/videomain2.png';
 import vm3 from '../assets/videomain3.png';
 import '../assets/css/styles.css';
-import SearchBar from './SearchBar';
 
 const videos = [
   {id:1, title: 'Excel Tips 1', thumbnail: vm1 },
@@ -24,8 +23,6 @@ const VideoMain = () => {
         <h2>Video Section</h2>
         <p>This is where the videos will appear from the database.</p>
       </div>
-
-      <SearchBar onSearch ={setSearchTerm} />
 
       <div className="video-area">
         {filteredVideos.length === 0 ? (
