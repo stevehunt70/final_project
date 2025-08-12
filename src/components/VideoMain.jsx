@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import vm1 from '../assets/videomain1.png';
 import vm2 from '../assets/videomain2.png';
 import vm3 from '../assets/videomain3.png';
 import '../assets/css/styles.css';
+import SearchBar from './SearchBar';
 
 const videos = [
   {id:1, title: 'Excel Tips 1', thumbnail: vm1 },
@@ -12,6 +13,11 @@ const videos = [
 ]
 
 const VideoMain = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const filteredVideos = videos.filter(video =>
+    video.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
   return (
     <div>
       <div align="center">
@@ -19,18 +25,24 @@ const VideoMain = () => {
         <p>This is where the videos will appear from the database.</p>
       </div>
 
+      <SearchBar onSearch ={setSearchTerm} />
+
       <div className="video-area">
-        {videos.map(video => (
-          <div key={video.id} className="card">
-            <Link to={`/video/${video.id}`}>
-              <img src={video.thumbnail} alt={video.title} key={video.id} />
-            </Link>
-            <div className="container">
-              <h4>{video.title}</h4>
-              <p>Other stuff here about the video</p>
+        {filteredVideos.length === 0 ? (
+          <p style={{ textAlign: "center" }}>No videos found</p>
+        ) : (
+          filteredVideos.map((video) => (
+            <div key={video.id} className="card">
+              <Link to={`/video/${video.id}`}>
+                <img src={video.thumbnail} alt={video.title} />
+              </Link>
+              <div className="container">
+                <h4>{video.title}</h4>
+                <p>Other stuff here about the video</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
