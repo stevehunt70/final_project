@@ -1,6 +1,7 @@
 dotenv
 react
 react-dom
+react-router-dom
 mysql
 jsonwebtoken
 vite
