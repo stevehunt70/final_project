@@ -1,22 +1,39 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import vm1 from '../assets/videomain1.png';
+import vm2 from '../assets/videomain2.png';
+import vm3 from '../assets/videomain3.png';
+import '../assets/css/styles.css';
+
+const videos = [
+  {id:1, title: 'Excel Tips 1', thumbnail: vm1 },
+  {id:2, title: 'Excel Tips 2', thumbnail: vm2 },
+  {id:3, title: 'Excel Tips 3', thumbnail: vm3 },
+]
 
 const VideoMain = () => {
   return (
-    <div style={styles.videoArea}>
-      <h2>Video Section</h2>
-      <p>This is where your videos will appear.</p>
+    <div>
+      <div align="center">
+        <h2>Video Section</h2>
+        <p>This is where the videos will appear from the database.</p>
+      </div>
+
+      <div className="video-area">
+        {videos.map(video => (
+          <div key={video.id} className="card">
+            <Link to={`/video/${video.id}`}>
+              <img src={video.thumbnail} alt={video.title} key={video.id} />
+            </Link>
+            <div className="container">
+              <h4>{video.title}</h4>
+              <p>Other stuff here about the video</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
-};
-
-const styles = {
-  videoArea: {
-    backgroundColor: '#fafafa',
-    border: '1px solid #ddd',
-    padding: '20px',
-    borderRadius: '8px',
-    textAlign: 'center',
-  },
 };
 
 export default VideoMain;

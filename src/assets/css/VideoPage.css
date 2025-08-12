@@ -1,0 +1,42 @@
+.video-page {
+  display: flex;
+  gap: 20px;
+}
+
+.main-video {
+  flex: 2;
+}
+
+.comments-section {
+  margin-top: 15px;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.video-list {
+  flex: 1;
+}
+
+.video-item {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.video-item img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.video-item:hover {
+  background-color: #f0f0f0;
+}
+
+.video-item.active {
+  background-color: #ddd;
+}
