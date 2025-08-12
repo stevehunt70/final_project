@@ -1,37 +1,52 @@
 import React from "react";
+import SearchBar from "./SearchBar";
+import profilePic from "../assets/Profile.png";
 
 const Header = () => {
   return (
-    <header
-      style={{
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "10px 16px",
-        borderBottom: "1px solid #ccc",
-      }}
-    >
-      <div>☰</div>
+    <header style={styles.header}>
+      <button style={styles.menuButton}>☰</button>
 
-      <input
-        type="text"
-        placeholder="Search"
-        style={{
-          flexGrow: 1,
-          margin: "0 20px",
-          padding: "6px 12px",
-          border: "1px solid #ccc",
-          borderRadius: "4px",
-        }}
-      />
+      <div style={styles.searchBarContainer}>
+        <SearchBar />
+      </div>
 
       <img
-        src="..assets/Profile.png"
+        src={profilePic}
         alt="Profile"
         style={{ width: "40px", height: "40px", borderRadius: "50%" }}
       />
     </header>
   );
+};
+
+const styles = {
+  header: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: "10px 16px",
+    borderBottom: "1px solid #ccc",
+    backgroundColor: "#f9f9f9",
+    gap: "10px",
+  },
+  menuButton: {
+    fontSize: "24px",
+    background: "none",
+    border: "none",
+    cursor: "pointer",
+  },
+  searchBarContainer: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+  },
+  profileImage: {
+    width: "40px",
+    height: "40px",
+    borderRadius: "50%",
+    objectFit: "cover",
+  },
 };
 
 export default Header;
