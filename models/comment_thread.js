@@ -1,3 +1,4 @@
+// File: models/comment_thread.js
 const { Model, DataTypes, Sequelize } = require("sequelize");
 
 const sequelize = require("../config/connection");
@@ -9,13 +10,15 @@ CommentThread.init(
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
     reply_text: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
     user_id: {
-      type: DataTypes.TEXT,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     createdOn: {
@@ -29,7 +32,7 @@ CommentThread.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "CommentThread",
+    modelName: "comment_thread",
   }
 );
 

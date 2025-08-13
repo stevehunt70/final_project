@@ -1,3 +1,4 @@
+// File: models/video_comment.js
 const { Model, DataTypes, Sequelize } = require("sequelize");
 
 const sequelize = require("../config/connection");
@@ -9,6 +10,8 @@ VideoComment.init(
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
     comment_text: {
       type: DataTypes.TEXT,
@@ -37,7 +40,7 @@ VideoComment.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "VideoComment",
+    modelName: "video_comment",
   }
 );
 

@@ -36,6 +36,12 @@ User.init(
         len: [8],
       },
     },
+    avatar_url: {
+       type: DataTypes.TEXT
+    },
+    channel_name  : {
+       type: DataTypes.TEXT
+    },    
     createdOn: {
       type: DataTypes.DATE,
       allowNull: false,
