@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import VideoPlayer from './VideoPlayer';
-import VideoList from './VideoList';
+import VideoPlayer from '../components/VideoPlayer';
+import VideoList from '../components/VideoList';
 import vm1 from '../assets/videomain1.png';
 import vm2 from '../assets/videomain2.png';
 import vm3 from '../assets/videomain3.png';

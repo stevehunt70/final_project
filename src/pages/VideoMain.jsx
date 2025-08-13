@@ -30,7 +30,7 @@ const VideoMain = () => {
         ) : (
           filteredVideos.map((video) => (
             <div key={video.id} className="card">
-              <Link to={`/video/${video.id}`}>
+              <Link to={`/videopage/${video.id}`}>
                 <img src={video.thumbnail} alt={video.title} />
               </Link>
               <div className="container">

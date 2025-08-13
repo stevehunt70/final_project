@@ -1,20 +1,27 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
-import Login from './components/VideoMain';
-import VideoMain from './components/VideoMain';
-import VideoPage from './components/VideoPage';
+import Layout from './layouts/Layout';
+import LoginRegister from './pages/LoginRegister';
+import VideoMain from './pages/VideoMain';
+import VideoPage from './pages/VideoPage';
 
 function App() {
   return (
     <Router>
-      <Layout>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/video" element={<VideoMain />} />
-          <Route path="/video/:id" element={<VideoPage />} />
+          {/* login page without header and footer */}
+          <Route path="/" element={<LoginRegister />} />
+
+          {/* Exverything after login uses the layout */}
+          <Route path="/videomain" element={
+            <Layout>
+              <VideoMain />
+            </Layout>} />
+          <Route path="/videopage/:id" element={
+            <Layout>
+              <VideoPage />
+            </Layout>} />
         </Routes>
-      </Layout>
     </Router>
   );
 }
