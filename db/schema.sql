@@ -1,2 +1,2 @@
-drop database if exists posts_db;
-create database posts_db;
+drop database if exists gota_video_db;
+create database gota_video_db;
