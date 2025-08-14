@@ -11,7 +11,6 @@ nodemon
 concurrently 
 mysql2
 bcrypt
-axios
 
 # Additional setup instructions
 Change the .env file to include your MySQL database password:
