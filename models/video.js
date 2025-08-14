@@ -15,13 +15,14 @@ Video.init({
     type: DataTypes.TEXT,
     allowNull: false,
   },
-  discription: {
+  description: {
     type: DataTypes.TEXT,
     allowNull: false,
   },
   num_likes: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    defaultValue: 0
   },
   url: {
     type: DataTypes.TEXT,
