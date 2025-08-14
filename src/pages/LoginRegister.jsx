@@ -5,7 +5,7 @@ export default function LoginRegister() {
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
 
-  function handleLogin() {
+  function handleSubmit() {
     navigate("/videomain");
   }
 
@@ -17,24 +17,68 @@ export default function LoginRegister() {
           <p>Welcome to Office Insights</p>
         </h2>
         <div style={styles.signIn}>
-          <div><label>enter user id:</label></div>
-          <div><input style={styles.singInInput} type="text" placeholder="User ID or Email" size="50" /></div>
-          <br />
-          <div><label>enter password:</label></div>
-          <div><input style={styles.singInInput} type="password" placeholder="Password" size="50" /></div>
-
-        {isRegister && (
-          <input type="password" placeholder="Confirm Password" />
-        )}
+          {/* show if new registration */}
+          {isRegister && (
+            <div>
+              <div><label>enter a username:</label></div>
+              <div>
+                <input
+                  style={styles.signInInput}
+                  type="text"
+                  placeholder="Enter a Username"
+                  size="50"
+                />
+              </div>
+              <br />
+            </div>            
+          )}
+          {/* enter email address for login or register */}          
+            <div><label>enter email:</label></div>
+            <div>
+              <input
+                style={styles.signInInput}
+                type="text"
+                placeholder="Enter Email"
+                size="50" 
+              />
+            </div>
+            <br />
+            {/* enter password for login or register */}
+            <div><label>enter password:</label></div>
+            <div>
+              <input
+                style={styles.signInInput}
+                type="password"
+                placeholder="Enter Password"
+                size="50" 
+              />
+            </div>
+            <br />
+            {/* confirm password if register */}
+            {isRegister && (
+              <div>
+                <div><label>Confirm Password:</label></div>
+                <div>
+                <input
+                  style={styles.signInInput}
+                  type="password"
+                  placeholder="Confirm Your Password"
+                  size="50"
+                />
+                </div>
+                <br />
+              </div>
+            )}
         </div>        
         <div>
-          <button style={styles.signInButton} onClick={handleLogin}>
-            {isRegister ? "Register" : "Login"}
-          </button>
-
-          <button style={styles.signInButton} onClick={() => setIsRegister(!isRegister)}>
-            {isRegister ? "Already have an account? Login" : "New here? Register"}
-          </button>
+        {/* submit to login button*/}
+        <button style={styles.signInButton} onClick={handleSubmit}>
+          {isRegister ? "Register" : "Login"}
+        </button>
+        {/* register button */}
+        <button style={styles.signInButton} onClick={() => setIsRegister(!isRegister)}>
+          {isRegister ? "Already have an account? Login" : "New here? Register"}
+        </button>
         </div>
       </div>
     </div>
@@ -66,7 +110,7 @@ const styles = {
     gap: '5px',
     marginBottom: '20px',
   },
-  singInInput: {
+  signInInput: {
     border: '1px solid #c6c9ec',
     size: '300',
   },
