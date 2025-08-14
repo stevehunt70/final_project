@@ -1,4 +1,3 @@
-// server.js
 // Import required packages
 
 const express = require("express");
@@ -13,6 +12,7 @@ const Video = require("./models/video");
 const app = express();
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
 
