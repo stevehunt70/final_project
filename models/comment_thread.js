@@ -20,8 +20,13 @@ CommentThread.init(
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },    
+    num_likes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
     },
-    createdOn: {
+    created_at: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.NOW,
