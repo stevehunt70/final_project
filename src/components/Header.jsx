@@ -99,7 +99,17 @@ const Header = () => {
   };
 
   return (
-    <header style={styles.header}>
+    <header style={styles.header}>      
+
+      <img src={logoImg} alt="Logo" style={styles.logoImage} />
+      <img src={logoTxt} alt="LogoTxt" style={styles.logoText} />
+
+      <div style={styles.searchBarContainer}>
+        <SearchBar />
+      </div>
+
+      <img src={profilePic} alt="Profile" style={styles.profileImage} />
+      
       {/* Hamburger menu */}
       <div style={{ position: "relative" }}>
         <button
@@ -109,7 +119,14 @@ const Header = () => {
           ☰
         </button>
         {menuOpen && (
-          <div style={styles.dropdown}>
+          <div style={{
+                  ...styles.dropdown,
+                  position: "absolute",
+                  top: "100%",
+                  right: 0,
+                  left: "auto",
+                  zIndex: 1000
+                }}>
             <p>
               <strong>{userName}</strong>
             </p>
@@ -123,15 +140,6 @@ const Header = () => {
           </div>
         )}
       </div>
-
-      <img src={logoImg} alt="Logo" style={styles.logoImage} />
-      <img src={logoTxt} alt="LogoTxt" style={styles.logoText} />
-
-      <div style={styles.searchBarContainer}>
-        <SearchBar />
-      </div>
-
-      <img src={profilePic} alt="Profile" style={styles.profileImage} />
     </header>
   );
 };
@@ -151,6 +159,7 @@ const styles = {
     background: "none",
     border: "none",
     cursor: "pointer",
+    paddingRight: "30px",
   },
   dropdown: {
     position: "absolute",
@@ -176,11 +185,11 @@ const styles = {
     objectFit: "cover",
   },
   logoImage: {
-    width: "50px",
+    width: "100px",
     height: "auto",
   },
   logoText: {
-    width: "75px",
+    width: "150px",
     height: "auto",
   },
 };
