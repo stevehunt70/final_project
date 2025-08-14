@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+/*import axios from "axios";*/
 import "./VideoUpload.css"; 
 
 const VideoUpload = () => {
@@ -15,7 +15,7 @@ const VideoUpload = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  /*const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
@@ -30,6 +30,7 @@ const VideoUpload = () => {
       alert("Error uploading video");
     }
   };
+  */
 
   return (
     <div className="upload-container">
