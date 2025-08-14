@@ -39,7 +39,7 @@ const VideoPage = () => {
 
   return (
     <div className="video-page" style={{dislay: 'flex', gap: '20px'}}>
-      <div style={{flex: 2}}>
+      <div style={{flex: 4}}>
         <VideoPlayer video={selectedVideo} />
       </div>
       <div style={{ flex: 1}}>

@@ -7,9 +7,9 @@ import '../assets/css/styles.css';
 import VideoCard from '../components/VideoCard';
 
 const videos = [
-  {id:1, title: 'Excel Tips 1', thumbnail: vm1 },
-  {id:2, title: 'Excel Tips 2', thumbnail: vm2 },
-  {id:3, title: 'Excel Tips 3', thumbnail: vm3 },
+  {id:1, title: 'Excel Tips 1', thumbnail: vm1, channel: 'Bobs Videos', views: '2' },
+  {id:2, title: 'Excel Tips 2', thumbnail: vm2, channel: 'Excel schmexcel', views: '1246' },
+  {id:3, title: 'Excel Tips 3', thumbnail: vm3, channel: 'BestExcelTips', views: '1.6m' },
 ]
 
 const VideoMain = () => {
@@ -39,10 +39,10 @@ const VideoMain = () => {
               <Link to={`/videopage/${video.id}`}>
                 <img src={video.thumbnail} alt={video.title} />
               </Link>
-              <div className="container">
-                <h4>{video.title}</h4>
-                <p>Other stuff here about the video</p>
-              </div>
+              <h3>{video.title}</h3>
+              <p>{video.channel}</p>
+              <p>{video.views} views</p>
+              
             </div>
           ))
         )}
