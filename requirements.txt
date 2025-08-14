@@ -11,6 +11,8 @@ nodemon
 concurrently 
 mysql2
 bcrypt
+--save-dev @vitejs/plugin-react
+
 
 # Additional setup instructions
 Change the .env file to include your MySQL database password:
