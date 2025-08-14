@@ -77,7 +77,7 @@ export default function LoginRegister() {
         </button>
         {/* register button */}
         <button style={styles.signInButton} onClick={() => setIsRegister(!isRegister)}>
-          {isRegister ? "Already have an account? Login" : "New here? Register"}
+          {isRegister ? "Already a user? Login" : "New here? Register"}
         </button>
         </div>
       </div>
