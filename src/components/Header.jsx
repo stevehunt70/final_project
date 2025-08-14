@@ -1,11 +1,15 @@
 import React from "react";
 import SearchBar from "./SearchBar";
 import profilePic from "../assets/Profile.png";
+import logoImg from "../assets/logo.png"
+import logoTxt from "../assets/logotxt.png"
 
 const Header = () => {
   return (
     <header style={styles.header}>
       <button style={styles.menuButton}>☰</button>
+      <img src={logoImg} alt="Logo" style={styles.logoImage} />
+      <img src={logoTxt} alt="LogoTxt" style={styles.logoText} />
 
       <div style={styles.searchBarContainer}>
         <SearchBar />
@@ -47,6 +51,14 @@ const styles = {
     borderRadius: "50%",
     objectFit: "cover",
   },
+  logoImage: {
+    width: "50px",
+    height: "auto",
+  },
+  logoText: {
+    width: "75px",
+    height: "auto",
+  }
 };
 
 export default Header;
