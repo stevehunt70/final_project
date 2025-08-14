@@ -4,6 +4,7 @@ import vm1 from '../assets/videomain1.png';
 import vm2 from '../assets/videomain2.png';
 import vm3 from '../assets/videomain3.png';
 import '../assets/css/styles.css';
+import VideoCard from '../components/VideoCard';
 
 const videos = [
   {id:1, title: 'Excel Tips 1', thumbnail: vm1 },
@@ -21,7 +22,11 @@ const VideoMain = () => {
     <div>
       <div align="center">
         <h2>Video Section</h2>
-        <p>This is where the videos will appear from the database.</p>
+        <div className="videos-grid">
+          {[...Array(8)].map((_, idx) => (
+            <VideoCard key={idx} />
+          ))}
+        </div>
       </div>
 
       <div className="video-area">
