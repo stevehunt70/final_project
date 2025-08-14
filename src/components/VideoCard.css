@@ -6,6 +6,20 @@
   justify-items: center;
 }
 
+/* Medium screens: 2 columns */
+@media (max-width: 1024px) {
+  .videos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small screens: 1 column */
+@media (max-width: 600px) {
+  .videos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .video-card {
   width: 100%;
   cursor: pointer;

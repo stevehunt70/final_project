@@ -19,9 +19,10 @@ const VideoMain = () => {
   );
   
   return (
-    <div>
-      <div align="center">
-        <h2>Video Section</h2>
+    <div align="center">
+      <h2>Video Section</h2>
+      <div className="video-area" >
+        {/*Below is where video cards are put which need to be updated*/}
         <div className="videos-grid">
           {[...Array(8)].map((_, idx) => (
             <VideoCard key={idx} />
