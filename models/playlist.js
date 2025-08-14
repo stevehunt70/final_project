@@ -1,14 +1,17 @@
+// File: models/playlist.js
 const { Model, DataTypes, Sequelize } = require("sequelize");
 
 const sequelize = require("../config/connection");
 
-class PlayList extends Model {}
+class Playlist extends Model {}
 
 Playlist.init(
   {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
     playlist_name: {
       type: DataTypes.TEXT,
@@ -29,9 +32,9 @@ Playlist.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: "PlayList",
+    modelName: "playlist",
   }
 );
 
 // Export Post model
-module.exports = PlayList;
+module.exports = Playlist;

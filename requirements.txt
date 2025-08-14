@@ -6,3 +6,14 @@ mysql
 jsonwebtoken
 vite
 sequelize
+express
+nodemon
+concurrently 
+mysql2
+bcrypt
+
+Check if db/schema.sql exists 
+Then login to MySQL:
+mysql -u root -p
+Then run the following command:
+source db/schema.sql;
