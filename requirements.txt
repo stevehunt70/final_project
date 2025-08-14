@@ -12,6 +12,12 @@ concurrently
 mysql2
 bcrypt
 
+# Additional setup instructions
+Change the .env file to include your MySQL database password:
+DB_PASSWORD=your_mysql_password:
+and set the database name:
+DB_DATABASE=gota_video_db
+
 Check if db/schema.sql exists 
 Then login to MySQL:
 mysql -u root -p
