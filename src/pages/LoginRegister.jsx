@@ -4,67 +4,73 @@ import React, { useState } from "react";
 export default function LoginRegister() {
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
+  const BACKEND_URL = "http://localhost:5000";
 
   // Form state
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [channelName, setChannelName] = useState("");
   const [error, setError] = useState("");
 
   async function handleSubmit() {
-    setError(""); // clear previous error
+  setError("");
 
+  // Prepare payload
+  const payload = isRegister
+    ? { username, email, password, channel_name: channelName }
+    : { email, password };
+
+  // Validation
+  if (isRegister && (!username || !email || !password || !channelName)) {
+    setError("All fields are required.");
+    return;
+  }
+
+  if (isRegister && password !== confirmPassword) {
+    setError("Passwords do not match.");
+    return;
+  }
+
+  if (!isRegister && (!email || !password)) {
+    setError("Email and password are required.");
+    return;
+  }
+
+  // Use proxy: Vite will forward /api requests to your backend
+  const url = isRegister ? "/api/user" : "/api/user/login";
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    // Try parsing JSON safely
+    let data = {};
     try {
-      let url = "";
-      let payload = {};
-
-      if (isRegister) {
-        // Validation
-        if (!username || !email || !password) {
-          setError("All fields are required.");
-          return;
-        }
-        if (password !== confirmPassword) {
-          setError("Passwords do not match.");
-          return;
-        }
-
-        url = "/api/user"; // registration endpoint
-        payload = { username, email, password };
-      } else {
-        if (!email || !password) {
-          setError("Please enter email and password.");
-          return;
-        }
-
-        url = "/api/user/login"; // login endpoint
-        payload = { email, password };
-      }
-
-      const res = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.message || "Invalid Credentials");
-        return;
-      }
-
-      // Save token to localStorage
-      localStorage.setItem("token", data.token);
-
-      // Navigate to main page
-      navigate("/VideoMain");
-    } catch (err) {
-      console.error(err);
-      setError("Network error, please try again.");
+      data = await res.json();
+    } catch {
+      // If response is empty or invalid JSON
+      data = {};
     }
-  };
+
+    if (!res.ok) {
+      setError(data.message || "Server returned an error.");
+      return;
+    }
+
+    // Save token and navigate
+    localStorage.setItem("token", data.token);
+    navigate("/VideoMain");
+  } catch (err) {
+    console.error("Network error:", err);
+    setError("Network error, please try again.");
+  }
+}
+
 
   return (
     <div style={styles.container}>
@@ -77,6 +83,7 @@ export default function LoginRegister() {
             <p style={{ color: "red", fontWeight: "bold" }}>{error}</p>
           )}
 
+          {/*username*/}
           {isRegister && (
             <>
               <div><label>Enter a username:</label></div>
@@ -93,12 +100,29 @@ export default function LoginRegister() {
               <br />
             </>
           )}
-
+          {/*channel name*/}
+          {isRegister && (
+            <>
+              <div><label>Enter a channel name:</label></div>
+              <div>
+                <input
+                  style={styles.signInInput}
+                  type="text"
+                  placeholder="Enter a Username"
+                  size="50"
+                  value={channelName}
+                  onChange={(e) => setChannelName(e.target.value)}
+                />
+              </div>
+              <br />
+            </>
+          )}
+          {/*email*/}
           <div><label>Enter email:</label></div>
           <div>
             <input
               style={styles.signInInput}
-              type="text"
+              type="email"
               placeholder="Enter Email"
               size="50"
               value={email}
@@ -106,7 +130,7 @@ export default function LoginRegister() {
             />
           </div>
           <br />
-
+          {/*password*/}
           <div><label>Enter password:</label></div>
           <div>
             <input
@@ -119,7 +143,7 @@ export default function LoginRegister() {
             />
           </div>
           <br />
-
+          {/*confirm password*/}
           {isRegister && (
             <>
               <div><label>Confirm Password:</label></div>

@@ -1,5 +1,6 @@
 // utils/auth.js
 const jwt = require('jsonwebtoken');
+const { User } = require("../models/user.js");
 
 const secret = 'mysecretssshhhhhhh';
 const expiration = '2h';
@@ -26,9 +27,7 @@ const authMiddleware = (req, res, next) => {
         console.log('Invalid token');
         res.status(400).json({ message: 'Invalid token: ' + err.message });
     }
-
-return req;
-}
+};
 
 const signToken = (user) => {
 
@@ -39,6 +38,33 @@ const signToken = (user) => {
         last_name: user.last_name,
     };
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
-}
+};
 
-module.exports = { authMiddleware, signToken };
+const protect = async (req, res, next) => {
+  let token;
+
+  if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
+    try {
+      token = req.headers.authorization.split(" ")[1];
+
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+      req.user = await User.findByPk(decoded.id, {
+        attributes: ["id", "username", "email", "channel_name"]
+      });
+
+      if (!req.user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      next();
+    } catch (error) {
+      console.error(error);
+      res.status(401).json({ message: "Not authorized, token failed" });
+    }
+  } else {
+    res.status(401).json({ message: "Not authorized, no token" });
+  }
+};
+
+module.exports = { authMiddleware, signToken, protect };

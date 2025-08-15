@@ -20,7 +20,6 @@ VALUES
 (1000002, 'charlie_js', 'charlie@example.com', 'password3', 'src/assets/Profile.png', 'Charlie Codes', NOW()),
 (1000003, 'dana_excel', 'dana@example.com', 'password4', 'src/assets/Profile.png', 'Excel with Dana', NOW()),
 (1000004, 'eve_misc', 'eve@example.com', 'password5', 'src/assets/Profile.png', 'Eve''s Tutorials', NOW());
-
 -- ----------------------------
 -- Populate Videos
 -- ----------------------------

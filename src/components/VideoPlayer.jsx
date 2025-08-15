@@ -1,5 +1,3 @@
-import React from 'react';
-
 const VideoPlayer = ({ video }) => {
   if (!video) return null;
 
@@ -27,5 +25,24 @@ const VideoPlayer = ({ video }) => {
     </div>
   );
 };
+{/* new script when VideoMain.jsx completed
+export default function VideoPlayer({ url, title, description, numLikes }) {
+  return (
+    <div>
+      <iframe
+        width="800"
+        height="450"
+        src={url}
+        title={title}
+        frameBorder="0"
+        allowFullScreen
+      ></iframe>
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <p>👍 {numLikes}</p>
+    </div>
+  );
+}
+*/}
 
 export default VideoPlayer;

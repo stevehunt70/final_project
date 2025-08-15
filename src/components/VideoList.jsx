@@ -1,4 +1,3 @@
-import React from 'react';
 import '../assets/css/VideoPage.css';
 
 const VideoList = ({ videos, selectedVideoId, onSelect }) => {
