@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
-import vm1 from '../assets/videomain1.png';
-import vm2 from '../assets/videomain2.png';
-import vm3 from '../assets/videomain3.png';
-import '../assets/css/styles.css';
-import VideoCard from '../components/VideoCard';
+import {useState} from "react";
+import { Link } from "react-router-dom";
+import vm1 from "../assets/videomain1.png";
+import vm2 from "../assets/videomain2.png";
+import vm3 from"../assets/videomain3.png";
+import "../assets/css/styles.css";
+import VideoCard from "../components/VideoCard";
 
 const videos = [
   {id:1, title: 'Excel Tips 1', thumbnail: vm1, channel: 'Bobs Videos', views: '2' },

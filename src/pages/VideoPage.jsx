@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import VideoPlayer from '../components/VideoPlayer';
-import VideoList from '../components/VideoList';
-import vm1 from '../assets/videomain1.png';
-import vm2 from '../assets/videomain2.png';
-import vm3 from '../assets/videomain3.png';
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import VideoPlayer from "../components/VideoPlayer";
+import VideoList from "../components/VideoList";
+import vm1 from "../assets/videomain1.png";
+import vm2 from "../assets/videomain2.png";
+import vm3 from "../assets/videomain3.png";
 import '../assets/css/VideoPage.css';
 
 // Mock DB data
@@ -52,5 +52,46 @@ const VideoPage = () => {
     </div>
   );
 };
+
+{/* this will be new script when VideoMain has been completed */}
+{/* export default function VideoPage() {
+  const { id } = useParams();
+  const [videoData, setVideoData] = useState(null);
+
+  useEffect(() => {
+    fetch(`/api/video/${id}`)
+      .then(res => res.json())
+      .then(data => setVideoData(data))
+      .catch(err => console.error(err));
+  }, [id]);
+
+  if (!videoData) return <p>Loading...</p>;
+*/}
+{/*
+  return (
+    <div className="video-page" style={{dislay: 'flex', gap: '20px'}}>
+      <div style={{flex: 4}}
+        <VideoPlayer
+          url={videoData.video_url}
+          title={videoData.title}
+          description={videoData.description}
+          numLikes={videoData.num_likes}
+        />
+
+        <h3>Comments</h3>
+        <ul>
+          {videoData.VideoComments.map(comment => (
+            <li key={comment.id}>{comment.text}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div style={{flex: 1}}>
+        <VideoList />
+      </div> 
+    </div>
+  );
+*/}
+
 
 export default VideoPage;

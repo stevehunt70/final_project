@@ -4,7 +4,7 @@ const router = require("express").Router();
 
 const postRoutes = require("./post");
 const categoryRoutes = require("./category");
-const userRoutes = require("./user");
+const userRoutes = require("./userRoutes");
 
 const videoRoutes = require("./video-routes");
 const videoCommentRoutes = require('./video_comment-routes');

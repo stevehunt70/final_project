@@ -64,7 +64,7 @@ const styles = {
 export default Header;
 */
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import profilePic from "../assets/Profile.png";
@@ -75,6 +75,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
+  const [channelName, setChannelName] = useState("");
 
   // Fetch user data from backend
   useEffect(() => {
@@ -83,20 +84,29 @@ const Header = () => {
       .then((data) => {
         setUserName(data.username);
         setEmail(data.email);
+        setChannelName(data.channel_name);
       })
       .catch((err) => console.error("Error fetching user data:", err));
   }, []);
 
-  // Save text to database
-  const saveText = async () => {
-    if (!text.trim()) return;
-    await fetch("/api/save-text", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
-    });
-    const updated = await fetch("/api/user").then((res) => res.json());
-  };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    fetch("/api/user", {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setUserName(data.username);
+        setEmail(data.email);
+        setChannelName(data.channel_name);
+      })
+      .catch((err) => console.error("Error fetching user data:", err));
+  }, []);
+
 
   return (
     <header style={styles.header}>      
@@ -131,8 +141,10 @@ const Header = () => {
               <strong>{userName}</strong>
             </p>
             <p>
-              {" "}
               <strong>{email}</strong>
+            </p>
+            <p>
+              <strong>{channelName}</strong>
             </p>
             <p>History:</p>
             <p>Upload Video:</p>

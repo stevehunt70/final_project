@@ -1,9 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Layout from './layouts/Layout';
-import LoginRegister from './pages/LoginRegister';
-import VideoMain from './pages/VideoMain';
-import VideoPage from './pages/VideoPage';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./layouts/Layout";
+import LoginRegister from "./pages/LoginRegister";
+import VideoMain from "./pages/VideoMain";
+import VideoPage from "./pages/VideoPage";
 import VideoUpload from "./pages/VideoUpload";
 
 function App() {

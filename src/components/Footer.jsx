@@ -1,5 +1,4 @@
-import React from 'react';
-import copyright from '../assets/copyright.png'
+import copyright from "../assets/copyright.png";
 
 const Footer = () => {
   return (
