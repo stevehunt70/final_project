@@ -29,5 +29,3 @@ router.use('/api/playlist_videos', playlistVideoRoutes);
 router.use('/api/view_history', viewHistoryRoutes);
 
 module.exports = router;
-
-

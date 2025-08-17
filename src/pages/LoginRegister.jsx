@@ -4,7 +4,7 @@ import React, { useState } from "react";
 export default function LoginRegister() {
   const navigate = useNavigate();
   const [isRegister, setIsRegister] = useState(false);
-  const BACKEND_URL = "http://localhost:5000";
+  const BACKEND_URL = "http://localhost:3002";
 
   // Form state
   const [username, setUsername] = useState("");
@@ -48,14 +48,7 @@ export default function LoginRegister() {
       body: JSON.stringify(payload),
     });
 
-    // Try parsing JSON safely
-    let data = {};
-    try {
-      data = await res.json();
-    } catch {
-      // If response is empty or invalid JSON
-      data = {};
-    }
+    const data = await res.json();
 
     if (!res.ok) {
       setError(data.message || "Server returned an error.");
