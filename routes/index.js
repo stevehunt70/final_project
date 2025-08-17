@@ -20,7 +20,7 @@ router.get("/api", (req, res) => {
 
 router.use("/api/categories", categoryRoutes);
 router.use("/api/posts", postRoutes);
-router.use("/api/users", userRoutes);
+router.use("/user", userRoutes);
 router.use('/api/videos', videoRoutes);
 router.use('/api/video_comments', videoCommentRoutes);
 router.use('/api/comment_threads', commentThreadRoutes);
