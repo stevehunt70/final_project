@@ -24,3 +24,6 @@ Then login to MySQL:
 mysql -u root -p
 Then run the following command:
 source db/schema.sql;
+The above creates an empty database. If you want to add some test data into it, run this: 
+source db/seed_data.sql;
+

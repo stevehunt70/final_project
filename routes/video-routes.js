@@ -1,16 +1,37 @@
 const router = require("express").Router();
-const { Video } = require("../models");
+// const { Video } = require("../models");
+const { Video, User } = require("../models"); // Add User here!
 const { authMiddleware } = require("../utils/auth");
 
-// GET all videos
+// // GET all videos
+// router.get("/", async (req, res) => {
+//   try {
+//     const videos = await Video.findAll();
+//     res.status(200).json(videos);
+//   } catch (err) {
+//     res.status(400).json(err);
+//   }
+// });
+
+// GET all videos, including associated user data
 router.get("/", async (req, res) => {
   try {
-    const videos = await Video.findAll();
+    const videos = await Video.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['channel_name', 'avatar_url', 'username'] // only fetch these columns
+        }
+      ],
+      order: [['created_at', 'DESC']] // optional: sorts videos by newest first
+    });
+
     res.status(200).json(videos);
   } catch (err) {
     res.status(400).json(err);
   }
 });
+
 
 // GET a single video by id
 router.get("/:id", async (req, res) => {
@@ -27,6 +48,70 @@ router.get("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+
+// GET all videos by a specific user_id and order them by creation date
+router.get("/user/:user_id", async (req, res) => {
+  try {
+    const videoData = await Video.findAll({
+      where: {
+        user_id: req.params.user_id,
+      },
+      order: [
+        ['created_at', 'DESC'] // This orders the results from newest to oldest
+      ]
+    });
+
+    if (videoData.length === 0) {
+      res.status(404).json({ message: "No videos found for this user" });
+      return;
+    }
+
+    res.status(200).json(videoData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// GET a list of videos, ordered by most likes or most recent, with user data
+// To have the list ordered by most_recent or most_liked, you can use a query parameter 
+// like /api/videos/ordered/most_recent or /api/videos/ordered/most_liked
+router.get("/ordered/:sort_by", async (req, res) => {
+  try {
+    let order_options = [];
+    if (req.params.sort_by === "most_liked") {
+      order_options = [
+        ['num_likes', 'DESC']
+      ];
+    } else if (req.params.sort_by === "most_recent") {
+      order_options = [
+        ['created_at', 'DESC']
+      ];
+    } else {
+      return res.status(400).json({ message: "Invalid sort_by parameter. Use 'most_liked' or 'most_recent'." });
+    }
+
+    const videoData = await Video.findAll({
+      order: order_options,
+      include: [
+        {
+          model: User,
+          attributes: ['channel_name', 'avatar_url', 'username'],
+        }
+      ]
+    });
+
+    if (videoData.length === 0) {
+      return res.status(404).json({ message: "No videos found." });
+    }
+
+    res.status(200).json(videoData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
 
 // POST a new video
 router.post("/", async (req, res) => {
