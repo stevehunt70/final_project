@@ -7,6 +7,7 @@ const sequelize = require("./config/connection");
 const routes = require("./routes");
 const userRoutes = require("./routes/userRoutes.js");
 const Video = require("./models/video");
+const videoCommentRoutes = require("./routes/video_comment-routes.js")
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use("/api/user", userRoutes);
+app.use("/api/video-comments", videoCommentRoutes);
 app.use(routes);
 
 // Video routes

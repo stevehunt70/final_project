@@ -1,6 +1,6 @@
 const router = require("express").Router();
 // const { Video } = require("../models");
-const { Video, User } = require("../models"); // Add User here!
+const { Video, User, VideoComment } = require("../models"); // Add User here!
 const { authMiddleware } = require("../utils/auth");
 
 // // GET all videos
@@ -36,19 +36,37 @@ router.get("/", async (req, res) => {
 // GET a single video by id
 router.get("/:id", async (req, res) => {
   try {
-    const videoData = await Video.findByPk(req.params.id);
+    const videoData = await Video.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ["channel_name", "avatar_url", "username"],
+        },
+        {
+          model: VideoComment,
+          as: "comments",
+          include: [
+            {
+              model: User,
+              as: "author",
+              attributes: ["username", "avatar_url"]
+            }
+          ],
+          order: [["created_at", "DESC"]],
+        },
+      ],
+    });
 
     if (!videoData) {
-      res.status(404).json({ message: "No video found with this id" });
-      return;
+      return res.status(404).json({ message: "No video found with this id" });
     }
 
     res.status(200).json(videoData);
   } catch (err) {
+    console.error(err);
     res.status(500).json(err);
   }
 });
-
 
 // GET all videos by a specific user_id and order them by creation date
 router.get("/user/:user_id", async (req, res) => {

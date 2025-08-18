@@ -10,7 +10,14 @@ const VideoList = ({ videos, selectedVideoId, onSelect }) => {
           className={`video-item ${video.id === selectedVideoId ? 'active' : ''}`}
           onClick={() => onSelect(video)}
         >
-          <img src={video.thumbnail} alt={video.title} />
+          <img
+            src={
+              video.thumbnail_url
+                ? new URL(`../assets/${video.thumbnail_url}`, import.meta.url).href
+                : "/placeholder.png"
+            }
+            alt={video.title}
+          />
           <p>{video.title}</p>
         </div>
       ))}
