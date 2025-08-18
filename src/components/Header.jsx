@@ -56,8 +56,14 @@ const Header = () => {
 
   return (
     <header style={styles.header}>
+      
       <img src={logoImg} alt="Logo" style={styles.logoImage} />
       <img src={logoTxt} alt="LogoTxt" style={styles.logoText} />
+
+      <div>
+        <button style={styles.linkButton} onClick={() => navigate("/upload")}>upload a video</button>
+        <button style={styles.linkButton} onClick={() => navigate("/videomain")}>all videos</button>
+      </div>
 
       <div style={styles.searchBarContainer}>
         <SearchBar />
@@ -94,7 +100,7 @@ const Header = () => {
                 <hr />
                 <div style={styles.buttonHolder}>
                 <button style={styles.button}> history</button>
-                <button style={styles.button}> upload video</button>
+                <button style={styles.button} onClick={() => navigate("/upload")}> upload video</button>
                 <button style={styles.button} onClick={handleLogout}> log out</button>
                 </div>
                 </div>
@@ -115,7 +121,31 @@ const styles = {
     padding: "10px 16px",
     borderBottom: "1px solid #ccc",
     backgroundColor: "#f9f9f9",
-    gap: "10px",
+  },
+  leftSection: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+  },
+  centerSection: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+  },
+  rightSection: {
+    display: "flex",
+    alignItems: "center",
+    gap: "12px",
+  },
+  linkButton: {
+    backgroundColor: "#f9f9f9",
+    margin: "20px 0 20px 40px",
+    height: "2rem",
+    border: "none",
+    borderTop: "1px solid black",
+    borderBottom: "1px solid black",
+    borderRadius: "4px",
+
   },
   menuButton: {
     fontSize: "24px",
