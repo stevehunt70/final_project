@@ -72,14 +72,10 @@ export default function LoginRegister() {
         <img src={logo} alt="Office Insights Logo" style={styles.logo} />
         <div style={styles.tagline}>
           <p style={styles.title}>OFFICE INSIGHTS</p>
-          <p style={styles.subtext}>SKILLS FOR</p>
-          <p style={styles.subtext}>TODAY</p>
-          <p style={styles.subtext}>TOMORROW</p>
-          <p style={styles.subtext}>THE FUTURE</p>
         </div>
       </div>
       <div style={styles.formContainer}>
-        <h2>Welcome to Office Insights</h2>
+        <h2 align="center">Welcome to Office Insights</h2>
         <div style={styles.signIn}>
           {error && <p style={styles.error}>{error}</p>}
 
@@ -161,6 +157,13 @@ export default function LoginRegister() {
             {isRegister ? "Already a user? Login" : "New here? Register"}
           </button>
         </div>
+      </div>
+      <div style={styles.tagline}>
+        <br />      
+        <p style={styles.subtext}>SKILLS FOR</p>
+        <p style={styles.subtext}>TODAY</p>
+        <p style={styles.subtext}>TOMORROW</p>
+        <p style={styles.subtext}>THE FUTURE</p>
       </div>
     </div>
   );
