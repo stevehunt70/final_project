@@ -1,17 +1,8 @@
+// routes/video-routes.js
 const router = require("express").Router();
 // const { Video } = require("../models");
 const { Video, User, VideoComment } = require("../models"); // Add User here!
 const { authMiddleware } = require("../utils/auth");
-
-// // GET all videos
-// router.get("/", async (req, res) => {
-//   try {
-//     const videos = await Video.findAll();
-//     res.status(200).json(videos);
-//   } catch (err) {
-//     res.status(400).json(err);
-//   }
-// });
 
 // GET all videos, including associated user data
 router.get("/", async (req, res) => {

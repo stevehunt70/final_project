@@ -57,6 +57,7 @@ export default function LoginRegister() {
 
     // Save token and navigate
     localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user)); // <-- Added by Dan
     navigate("/VideoMain");
   } catch (err) {
     console.error("Network error:", err);

@@ -1,4 +1,68 @@
 .upload-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.text-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+.btn {
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+
+.video-btn {
+  background-color: #82858a; 
+  color: white;
+}
+
+.image-btn {
+  background-color: #82858a; 
+  color: white;
+}
+
+.publish-btn {
+  background-color: #2b579a; 
+  color: white;
+}
+
+.preview-video {
+  max-width: 400px;
+  border-radius: 6px;
+}
+
+.preview-image {
+  max-width: 200px;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+}
+/* For messages */
+.status-message {
+  font-weight: bold;
+  margin-top: 1rem;
+}
+.status-message:empty {
+  display: none;
+}
+
+/* OLD settings  */
+/* .upload-container {
   max-width: 600px;
   margin: 40px auto;
   padding: 30px;
@@ -47,4 +111,4 @@
 
 .upload-form button:hover {
   background-color: #005fa3;
-}
+} */
