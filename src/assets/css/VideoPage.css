@@ -5,13 +5,137 @@
 
 .main-video {
   flex: 4;
+  display: flex;
+  flex-direction: column;
 }
 
+.main-video iframe {
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  margin-bottom: 16px;
+}
+
+/* Title + Likes Row */
+.video-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.video-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111;
+  margin: 0;
+  flex: 1;
+}
+
+.video-description {
+  font-size: 0.95rem;
+  color: #444;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+/* Likes button */
+.likes-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f1f1f1;
+  border-radius: 20px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.likes-container:hover {
+  background: #e4e4e4;
+  transform: scale(1.03);
+}
+
+.likes-container .emoji {
+  font-size: 1.2rem;
+}
+
+.likes-container span {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+}
+
+/*COMMENTS*/
 .comments-section {
-  margin-top: 15px;
-  padding: 10px;
+  margin-top: 20px;
+  padding: 16px;
   background: #f9f9f9;
-  border-radius: 8px;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+}
+
+.comments-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
+
+.comment {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 0.95rem;
+}
+
+.comment:last-child {
+  border-bottom: none;
+}
+
+.comment strong {
+  color: #111;
+  margin-right: 6px;
+}
+
+/*  ADD COMMENT INPUT */
+.add-comment-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.add-comment-box input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.add-comment-box input:focus {
+  border-color: #aaa;
+  box-shadow: 0 0 4px rgba(0,0,0,0.15);
+  outline: none;
+}
+
+.add-comment-box button {
+  background: #065fd4;
+  color: #fff;
+  font-weight: 500;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.add-comment-box button:hover {
+  background: #054bb1;
+  transform: scale(1.02);
 }
 
 .video-list {
