@@ -1,10 +1,19 @@
 const router = require("express").Router();
 const { VideoComment } = require("../models");
-const { authMiddleware } = require("../utils/auth");
 
 // GET all video comments
 router.get("/", async (req, res) => {
   try {
+    const { video_id } = req.query;
+
+    if (video_id) {
+      const comments = await VideoComment.findAll({
+        where: { video_id }
+      });
+      return res.status(200).json(comments);
+    }
+
+    // fallback: return all comments if no video_id specified
     const comments = await VideoComment.findAll();
     res.status(200).json(comments);
   } catch (err) {

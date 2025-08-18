@@ -2,96 +2,72 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import VideoPlayer from "../components/VideoPlayer";
 import VideoList from "../components/VideoList";
-import vm1 from "../assets/videomain1.png";
-import vm2 from "../assets/videomain2.png";
-import vm3 from "../assets/videomain3.png";
 import '../assets/css/VideoPage.css';
 
-// Mock DB data
-const videosFromDB = [
-  {
-    id: 1,
-    title: "Excel Tips Part 1",
-    thumbnail: vm1,
-    url: "https://www.youtube.com/embed/ZthlSLYc5UQ",
-    comments: ["Great video!", "Very helpful!", "More please!"]
-  },
-  {
-    id: 2,
-    title: "Excel Tips Part 2",
-    thumbnail: vm2,
-    url: "https://www.youtube.com/embed/JPzfno4ot-g",
-    comments: ["Clear explanation!", "Nice examples."]
-  },
-  {
-    id: 3,
-    title: "Excel Tips Part 3",
-    thumbnail: vm3,
-    url: "https://www.youtube.com/embed/QvXvfc6oEqI",
-    comments: ["Learned a lot", "Thanks for sharing!"]
-  }
-];
-
 const VideoPage = () => {
-  const { id } = useParams();
-  const initialVideo = videosFromDB.find(v => v.id === parseInt(id, 10)) || videosFromDB[0];
-  const [selectedVideo, setSelectedVideo] = useState(initialVideo);
+  const { id } = useParams(); // e.g. /video/5 → id = "5"
+  const [videos, setVideos] = useState([]);
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch all videos + comments for the current one
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // fetch all videos (for sidebar list)
+        const resVideos = await fetch("/api/videos");
+        const videosData = await resVideos.json();
+        setVideos(videosData);
+
+        // pick the video that matches the route param
+        const current = videosData.find(v => v.id === parseInt(id));
+        setSelectedVideo(current);
+
+        // fetch comments for that video
+        const resComments = await fetch(`/api/video-comments?video_id=${id}`);
+        const commentsData = await resComments.json();
+        setComments(commentsData);
+      } catch (err) {
+        console.error("Error fetching video page:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  // When user clicks another video in VideoList
+  const handleSelectVideo = async (video) => {
+    setSelectedVideo(video);
+
+    // fetch its comments
+    const resComments = await fetch(`/api/video-comments?video_id=${video.id}`);
+    const commentsData = await resComments.json();
+    setComments(commentsData);
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (!selectedVideo) return <p>Video not found.</p>;
 
   return (
-    <div className="video-page" style={{dislay: 'flex', gap: '20px'}}>
-      <div style={{flex: 4}}>
-        <VideoPlayer video={selectedVideo} />
+    <div className="video-page">
+      {/* main video player flex-grow 4 */}
+      <div className="main-video">
+        <VideoPlayer video={selectedVideo} comments={comments} />
       </div>
-      <div style={{ flex: 1}}>
+
+      {/* sidebar list flex-grow 1 */}
+      <div className="video-list">
         <VideoList
-          videos={videosFromDB}
+          videos={videos}
           selectedVideoId={selectedVideo.id}
-          onSelect={setSelectedVideo}
+          onSelect={handleSelectVideo}
         />
       </div>
     </div>
   );
 };
-
-{/* this will be new script when VideoMain has been completed */}
-{/* export default function VideoPage() {
-  const { id } = useParams();
-  const [videoData, setVideoData] = useState(null);
-
-  useEffect(() => {
-    fetch(`/api/video/${id}`)
-      .then(res => res.json())
-      .then(data => setVideoData(data))
-      .catch(err => console.error(err));
-  }, [id]);
-
-  if (!videoData) return <p>Loading...</p>;
-*/}
-{/*
-  return (
-    <div className="video-page" style={{dislay: 'flex', gap: '20px'}}>
-      <div style={{flex: 4}}
-        <VideoPlayer
-          url={videoData.video_url}
-          title={videoData.title}
-          description={videoData.description}
-          numLikes={videoData.num_likes}
-        />
-
-        <h3>Comments</h3>
-        <ul>
-          {videoData.VideoComments.map(comment => (
-            <li key={comment.id}>{comment.text}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div style={{flex: 1}}>
-        <VideoList />
-      </div> 
-    </div>
-  );
-*/}
-
 
 export default VideoPage;

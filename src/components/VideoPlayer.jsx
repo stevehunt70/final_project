@@ -1,4 +1,4 @@
-const VideoPlayer = ({ video }) => {
+const VideoPlayer = ({ video, comments }) => {
   if (!video) return null;
 
   return (
@@ -13,36 +13,24 @@ const VideoPlayer = ({ video }) => {
       ></iframe>
 
       <h2>{video.title}</h2>
+      <p>{video.description}</p>
+      <p>{video.num_likes}</p>
 
       <div className="comments-section">
         <h3>Comments</h3>
-        {video.comments.length > 0 ? (
-          video.comments.map((c, i) => <p key={i}>{c}</p>)
-        ) : (
-          <p>No comments yet.</p>
-        )}
+        {comments.length > 0 ? (
+          comments.map((c) => (
+          <div key={c.id} className="comment">
+            <strong>{c.author?.username || "Anonymous"}:</strong> {" "}
+            {c.comment_text}
+          </div>
+        ))
+      ) : (
+        <p>No comments yet.</p>
+      )}
       </div>
     </div>
   );
 };
-{/* new script when VideoMain.jsx completed
-export default function VideoPlayer({ url, title, description, numLikes }) {
-  return (
-    <div>
-      <iframe
-        width="800"
-        height="450"
-        src={url}
-        title={title}
-        frameBorder="0"
-        allowFullScreen
-      ></iframe>
-      <h2>{title}</h2>
-      <p>{description}</p>
-      <p>👍 {numLikes}</p>
-    </div>
-  );
-}
-*/}
 
 export default VideoPlayer;
