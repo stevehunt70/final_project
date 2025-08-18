@@ -1,3 +1,4 @@
+// routes/post.js
 // create a new router
 const app = require("express").Router();
 

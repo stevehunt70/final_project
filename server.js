@@ -2,6 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const cors = require("cors"); // Import CORS
 
 const sequelize = require("./config/connection");
 const routes = require("./routes");
@@ -13,12 +14,16 @@ const app = express();
 const PORT = process.env.PORT || 3002;
 
 // Parse incoming JSON
+app.use(cors()); 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, "public")));
+
+
+
 
 // Routes
 app.use("/api/user", userRoutes);
