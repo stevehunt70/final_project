@@ -3,10 +3,18 @@ import SearchBar from "./SearchBar";
 import profilePic from "../assets/Profile.png";
 import logoImg from "../assets/logo.png";
 import logoTxt from "../assets/logotxt.png";
+import usernameImg from "../assets/username.png";
+import emailImg from "../assets/email.png";
+import logoutImg from "../assets/logout.png";
+import historyImg from "../assets/history.png";
+import hamburgerImg from "../assets/hamburger.png";
+import uploadImg from "../assets/upload.png";
+import allVideosImg from "../assets/allvideos.png";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [menuOpenProfile, setMenuOpenProfile] = useState(false);
   const [user, setUser] = useState(null); // null if not logged in
 
   useEffect(() => {
@@ -61,26 +69,61 @@ const Header = () => {
       <img src={logoTxt} alt="LogoTxt" style={styles.logoText} />
 
       <div>
-        <button style={styles.linkButton} onClick={() => navigate("/upload")}>upload a video</button>
-        <button style={styles.linkButton} onClick={() => navigate("/videomain")}>all videos</button>
+        <div style={{ position: "relative" }}>
+          <img src={hamburgerImg} 
+                style={styles.hamburgerMenu} onClick={() => setMenuOpen(!menuOpen)} />
+          {menuOpen && (
+            <div
+              style={{
+                ...styles.dropdownMenu,
+                position: "absolute",
+                top: "100%",
+                width: "200px",
+                right: "auto",
+                left: 0,
+                zIndex: 1000,
+              }}>
+            
+              <div style={styles.dropdownContent}>
+                <hr />              
+                <div style={styles.profileText}>
+                  <div style={styles.dropdownImg}>
+                    <img src={allVideosImg} style={{...styles.menuImage, cursor: "pointer"}} onClick={() => navigate("/videomain")}/>
+                    <p style={{cursor: "pointer"}} onClick={() => navigate("/videomain")}>all videos</p>
+                  </div>
+                  <div style={styles.dropdownImg}>
+                    <img src={uploadImg} style={{...styles.menuImage, cursor: "pointer"}} onClick={() => navigate("/upload")} />
+                    <p style={{cursor: "pointer"}} onClick={() => navigate("/upload")}>upload a video</p>
+                  </div>
+                  <div style={styles.dropdownImg}>
+                    <img src={logoutImg} style={{...styles.menuImage, cursor: "pointer"}} onClick={handleLogout} />
+                    <p style={{cursor: "pointer"}} onClick={handleLogout}>log out</p>
+                  </div>
+                  <hr />
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       <div style={styles.searchBarContainer}>
         <SearchBar />
       </div>
 
-      <img src={profilePic} alt="Profile" style={styles.profileImage} />
-
-      {/* Hamburger menu only shows for logged-in users */}
+      {/* Profile menu only shows for logged-in users */}
       {user && (
         <div style={{ position: "relative" }}>
           <button
-            style={styles.menuButton}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            ☰
+            style={styles.menuButton} 
+            onClick={() => setMenuOpenProfile(!menuOpenProfile)}>
+              <img
+                src={profilePic}
+                alt="Profile Menu"
+                style={styles.profileImage}
+              />
           </button>
-          {menuOpen && (
+          {menuOpenProfile && (
             <div
               style={{
                 ...styles.dropdown,
@@ -88,21 +131,35 @@ const Header = () => {
                 top: "100%",
                 right: 0,
                 left: "auto",
+                width: "auto",
                 zIndex: 1000,
               }}
             >
-              <div style={styles.dropdownOverlay}></div>
+            <div style={styles.dropdownOverlay}></div>
               <div style={styles.dropdownContent}>              
                 <div style={styles.profileText}>
-                  <p> user name: {user.username}</p>
-                  <p> email: {user.email}</p>
-                  <p> channel name: {user.channel_name}</p>
-                <hr />
-                <div style={styles.buttonHolder}>
-                <button style={styles.button}> history</button>
-                <button style={styles.button} onClick={() => navigate("/upload")}> upload video</button>
-                <button style={styles.button} onClick={handleLogout}> log out</button>
-                </div>
+                  <hr />
+                  <div style={styles.dropdownImg}>
+                    <img src={usernameImg} style={styles.menuImage} />
+                    <p>{user.username}</p>
+                  </div>
+                  <div style={styles.dropdownImg}>
+                    <img src={emailImg} style={styles.menuImage} />
+                    <p>{user.email}</p>
+                  </div>
+                  <div style={styles.dropdownImg}>
+                    <img src={usernameImg} style={styles.menuImage} />
+                    <p>{user.channel_name}</p>
+                  </div>
+                  <div style={styles.dropdownImg}>
+                    <img src={historyImg} style={styles.menuImage} />
+                    <p>history</p>
+                  </div>
+                  <div style={styles.dropdownImg}>
+                    <img src={logoutImg} style={{...styles.menuImage, cursor: "pointer"}} onClick={handleLogout} />
+                    <p style={{cursor: "pointer"}} onClick={handleLogout}>log out</p>
+                  </div>
+                  <hr />
                 </div>
               </div>
             </div>
@@ -122,37 +179,42 @@ const styles = {
     borderBottom: "1px solid #ccc",
     backgroundColor: "#f9f9f9",
   },
-  leftSection: {
-    display: "flex",
-    alignItems: "center",
-    gap: "8px",
+  hamburgerMenu: {
+    marginLeft: "40px",
+    width: "40px",
+    height: "40px",
+    borderRadius: "50%",
+    cursor: "pointer",
+    objectFit: "cover"
   },
-  centerSection: {
-    flex: 1,
-    display: "flex",
-    justifyContent: "center",
+  profileImage: {
+    width: "40px",
+    height: "40px",
+    borderRadius: "50%",
+    objectFit: "cover",
+    marginRight: "75px",
   },
-  rightSection: {
-    display: "flex",
-    alignItems: "center",
-    gap: "12px",
-  },
-  linkButton: {
-    backgroundColor: "#f9f9f9",
-    margin: "20px 0 20px 40px",
-    height: "2rem",
-    border: "none",
-    borderTop: "1px solid black",
-    borderBottom: "1px solid black",
-    borderRadius: "4px",
-
+  menuImage: {
+    width: "40px",
+    height: "40px",
+    borderRadius: "50%",
+    objectFit: "cover",
+    marginRight: "10px",
   },
   menuButton: {
-    fontSize: "24px",
     background: "none",
     border: "none",
     cursor: "pointer",
-    paddingRight: "30px",
+    padding: 0,
+  },
+  dropdownMenu: {
+    backgroundColor: "white",
+    border: "1px solid #ccc",
+    borderRadius: "8px",
+    padding: "10px",
+    width: "200px",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+    zIndex: 1000,
   },
   dropdown: {
     backgroundColor: "white",
@@ -182,16 +244,16 @@ const styles = {
     position: "relative",
     zIndex: 1,
   },
+  dropdownImg: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: "10px",
+  },
   searchBarContainer: {
     flex: 1,
     display: "flex",
     justifyContent: "center",
-  },
-  profileImage: {
-    width: "40px",
-    height: "40px",
-    borderRadius: "50%",
-    objectFit: "cover",
   },
   logoImage: {
     width: "100px",
@@ -203,6 +265,9 @@ const styles = {
   },
   profileText: {
     color: "#2a0d83ff",
+    fontSize: "1rem",
+    fontWeight: "bold",
+    fontStyle: "italic",    
   },
   buttonHolder: {
     display: "flex",
@@ -210,10 +275,10 @@ const styles = {
     alignItems: "center",
   },
   button: {
-    width: "75%",
-    height: "auto",
+    border: "none",
+    backgroundColor: "transparent",
     alignItems: "center",
-    margin: "5px",
+    cursor: "grab"
   }
 };
 
