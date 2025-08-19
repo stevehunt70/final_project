@@ -13,7 +13,7 @@ const VideoList = ({ videos, selectedVideoId, onSelect }) => {
           <img
             src={
               video.thumbnail_url
-                ? new URL(`../assets/${video.thumbnail_url}`, import.meta.url).href
+                ? new URL(`../assets/thumbnails/${video.thumbnail_url}`, import.meta.url).href
                 : "/placeholder.png"
             }
             alt={video.title}
