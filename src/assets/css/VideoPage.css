@@ -59,6 +59,7 @@
 
 .likes-container .emoji {
   font-size: 1.2rem;
+  color: red;
 }
 
 .likes-container span {
@@ -97,6 +98,27 @@
   color: #111;
   margin-right: 6px;
 }
+
+.comment-card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.comment-header {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.comment-body {
+  font-size: 14px;
+  color: #555;
+}
+
 
 /*  ADD COMMENT INPUT */
 .add-comment-box {

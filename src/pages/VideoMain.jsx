@@ -54,8 +54,8 @@ const VideoMain = () => {
                     />
                   </Link>
                   <h3>{video.title}</h3>
-                  <p>{video.User?.channel_name || "Unknown Channel"}</p>
-                  <p>{video.views || 0} views</p>
+                  <p>{video.user?.channel_name || "Unknown Channel"}</p>
+                  <p>❤ {video.num_likes || 0} likes</p>
                 </div>
               ))}
             </div>
