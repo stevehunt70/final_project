@@ -160,10 +160,7 @@ export default function LoginRegister() {
       </div>
       <div style={styles.tagline}>
         <br />      
-        <p style={styles.subtext}>SKILLS FOR</p>
-        <p style={styles.subtext}>TODAY</p>
-        <p style={styles.subtext}>TOMORROW</p>
-        <p style={styles.subtext}>THE FUTURE</p>
+        <p style={styles.subtext}>SKILLS FOR TODAY, TOMORROW, THE FUTURE</p>
       </div>
     </div>
   );
@@ -206,9 +203,9 @@ const styles = {
   subtext: {
     textAlign: "center",
     fontFamily: "Georgia",
-    fontSize: "18px",
+    fontSize: "20px",
     color: "#1611a7ff",
-    margin: "6px 0",
+    margin: "16px 0",
     fontWeight: "600",
     letterSpacing: "2px",
     textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
