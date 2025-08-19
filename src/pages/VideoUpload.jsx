@@ -17,7 +17,7 @@ export default function UploadVideo() {
 
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
-  const userId = user?.id; // safe lookup
+  const userId = user?.id; 
 
   const handlePublish = async () => {
     if (!videoFile || !thumbnailFile || !title || !description) {
