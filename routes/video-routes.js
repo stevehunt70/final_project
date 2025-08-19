@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['channel_name', 'avatar_url', 'username'] // only fetch these columns
+          attributes: ['channel_name', 'avatar_url', 'username'] //  fetch these columns from User model
         }
       ],
       order: [['created_at', 'DESC']] // optional: sorts videos by newest first
