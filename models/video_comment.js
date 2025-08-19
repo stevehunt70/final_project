@@ -30,10 +30,6 @@ VideoComment.init(
       allowNull: false,
       defaultValue: 0,
     },
-    video_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     created_at: {
     type: DataTypes.DATE,
     allowNull: false,
