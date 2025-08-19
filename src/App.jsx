@@ -5,6 +5,7 @@ import LoginRegister from "./pages/LoginRegister";
 import VideoMain from "./pages/VideoMain";
 import VideoPage from "./pages/VideoPage";
 import VideoUpload from "./pages/VideoUpload";
+import SearchResults from "./pages/SearchResults";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         {/* login page without header and footer */}
         <Route path="/" element={<LoginRegister />} />
 
-        {/* Exverything after login uses the layout */}
+        {/* Everything after login uses the layout */}
         <Route
           path="/videomain"
           element={
@@ -27,6 +28,14 @@ function App() {
           element={
             <Layout>
               <VideoPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <Layout>
+              <SearchResults />
             </Layout>
           }
         />
