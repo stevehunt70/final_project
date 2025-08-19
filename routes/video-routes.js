@@ -172,4 +172,24 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// Increment like count
+router.post("/:id/like", async (req, res) => {
+  try {
+    const video = await Video.findByPk(req.params.id);
+    if (!video) {
+      return res.status(404).json({ message: "No video found with this id" });
+    }
+
+    video.num_likes += 1;
+    await video.save();
+
+    res.status(200).json({ num_likes: video.num_likes });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
+
+
+
 module.exports = router;
