@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
+import logo from "../assets/logo.png";
 
 export default function LoginRegister() {
   const navigate = useNavigate();
@@ -15,154 +16,139 @@ export default function LoginRegister() {
   const [error, setError] = useState("");
 
   async function handleSubmit() {
-  setError("");
+    setError("");
 
-  // Prepare payload
-  const payload = isRegister
-    ? { username, email, password, channel_name: channelName }
-    : { email, password };
+    // Prepare payload
+    const payload = isRegister
+      ? { username, email, password, channel_name: channelName }
+      : { email, password };
 
-  // Validation
-  if (isRegister && (!username || !email || !password || !channelName)) {
-    setError("All fields are required.");
-    return;
-  }
-
-  if (isRegister && password !== confirmPassword) {
-    setError("Passwords do not match.");
-    return;
-  }
-
-  if (!isRegister && (!email || !password)) {
-    setError("Email and password are required.");
-    return;
-  }
-
-  // Use proxy: Vite will forward /api requests to your backend
-  const url = isRegister ? "/api/user" : "/api/user/login";
-
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      setError(data.message || "Server returned an error.");
+    // Validation
+    if (isRegister && (!username || !email || !password || !channelName)) {
+      setError("All fields are required.");
       return;
     }
 
-    // Save token and navigate
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user)); // <-- Added by Dan
-    navigate("/VideoMain");
-  } catch (err) {
-    console.error("Network error:", err);
-    setError("Network error, please try again.");
-  }
-}
+    if (isRegister && password !== confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
 
+    if (!isRegister && (!email || !password)) {
+      setError("Email and password are required.");
+      return;
+    }
+
+    // Use proxy: Vite will forward /api requests to your backend
+    const url = isRegister ? "/api/user" : "/api/user/login";
+
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.message || "Server returned an error.");
+        return;
+      }
+
+      // Save token and navigate
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user)); // <-- Added by Dan
+      navigate("/VideoMain");
+    } catch (err) {
+      console.error("Network error:", err);
+      setError("Network error, please try again.");
+    }
+  }
 
   return (
-    <div style={styles.container}>
+    <div style={styles.pageWrapper}>
+      <div style={styles.logoSection}>
+        <img src={logo} alt="Office Insights Logo" style={styles.logo} />
+        <div style={styles.tagline}>
+          <p style={styles.title}>OFFICE INSIGHTS</p>
+        </div>
+      </div>
       <div style={styles.formContainer}>
-        <h2>
-          <p>Welcome to Office Insights</p>
-        </h2>
+        <h2 align="center">Welcome to Office Insights</h2>
         <div style={styles.signIn}>
-          {error && (
-            <p style={{ color: "red", fontWeight: "bold" }}>{error}</p>
-          )}
+          {error && <p style={styles.error}>{error}</p>}
 
           {/*username*/}
           {isRegister && (
             <>
-              <div><label>Enter a username:</label></div>
-              <div>
-                <input
-                  style={styles.signInInput}
-                  type="text"
-                  placeholder="Enter a Username"
-                  size="50"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-              <br />
+              <label>Enter a username:</label>
+
+              <input
+                style={styles.signInInput}
+                type="text"
+                placeholder="Enter a Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </>
           )}
           {/*channel name*/}
           {isRegister && (
             <>
-              <div><label>Enter a channel name:</label></div>
-              <div>
-                <input
-                  style={styles.signInInput}
-                  type="text"
-                  placeholder="Enter a Username"
-                  size="50"
-                  value={channelName}
-                  onChange={(e) => setChannelName(e.target.value)}
-                />
-              </div>
-              <br />
+              <label>Enter a channel name:</label>
+              <input
+                style={styles.signInInput}
+                type="text"
+                placeholder="Enter a Channel Name"
+                value={channelName}
+                onChange={(e) => setChannelName(e.target.value)}
+              />
             </>
           )}
           {/*email*/}
-          <div><label>Enter email:</label></div>
-          <div>
-            <input
-              style={styles.signInInput}
-              type="email"
-              placeholder="Enter Email"
-              size="50"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <br />
+          <label>Enter email:</label>
+          <input
+            style={styles.signInInput}
+            type="email"
+            placeholder="Enter Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
           {/*password*/}
-          <div><label>Enter password:</label></div>
-          <div>
-            <input
-              style={styles.signInInput}
-              type="password"
-              placeholder="Enter Password"
-              size="50"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <br />
+
+          <label>Enter password:</label>
+          <input
+            style={styles.signInInput}
+            type="password"
+            placeholder="Enter Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+
           {/*confirm password*/}
           {isRegister && (
             <>
-              <div><label>Confirm Password:</label></div>
-              <div>
-                <input
-                  style={styles.signInInput}
-                  type="password"
-                  placeholder="Confirm Your Password"
-                  size="50"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                />
-              </div>
-              <br />
+              <label>Confirm Password:</label>
+              <input
+                style={styles.signInInput}
+                type="password"
+                placeholder="Confirm Your Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
             </>
           )}
         </div>
 
-        <div>
+        <div style={styles.buttonGroup}>
           <button style={styles.signInButton} onClick={handleSubmit}>
             {isRegister ? "Register" : "Login"}
           </button>
 
           <button
-            style={styles.signInButton}
+            style={{ ...styles.signInButton, backgroundColor: "#17a328ff" }}
             onClick={() => {
               setIsRegister(!isRegister);
               setError("");
@@ -172,45 +158,97 @@ export default function LoginRegister() {
           </button>
         </div>
       </div>
+      <div style={styles.tagline}>
+        <br />      
+        <p style={styles.subtext}>SKILLS FOR</p>
+        <p style={styles.subtext}>TODAY</p>
+        <p style={styles.subtext}>TOMORROW</p>
+        <p style={styles.subtext}>THE FUTURE</p>
+      </div>
     </div>
   );
 }
 
 const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    paddingTop: '50px',
-    width: '100vw',
-    margin: '0 auto',
+  pageWrapper: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    fontFamily: "Verdana, sans-serif",
+    background: "linear-gradient(to right, #f9dd51, #f89e5e, #f25656)",
+    minHeight: "100vh",
+    padding: "30px",
+  },
+  logoSection: {
+    textAlign: "center",
+    marginBottom: "20px",
+  },
+  logo: {
+    width: "150px",
+    height: "auto",
+    marginBottom: "-10px"
+  },
+  tagline: {
+    fontSize: "16px",
+    lineHeight: "15px",
+    fontWeight: "bold",
+    color: "#444",
+    letterSpacing: "1px",
+  },
+  title: {
+    fontSize: "28px",
+    fontWeight: "bold",
+    color: "#0047ab",
+    marginBottom: "10px",
+    letterSpacing: "1.5px",
+    textTransform: "uppercase",
+  },
+  subtext: {
+    fontSize: "14px",
+    color: "#095b6bff",
+    margin: "2px 0",
+    letterSpacing: "1px",
   },
   formContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    width: '50vw',
-    fontFamily: 'Verdana',
-    fontSize: '14px',
-    border: '1px solid black',
-    borderRadius: '8px',
-    textAlign: 'center',
-    padding: '20px',
+    backgroundColor: "#ffffff",
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    padding: "30px",
+    width: "100%",
+    maxWidth: "450px",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
   },
   signIn: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '5px',
-    marginBottom: '20px',
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px",
+    marginTop: "20px",
   },
   signInInput: {
-    border: '1px solid #c6c9ec',
-    size: '300',
+    padding: "10px",
+    border: "1px solid #ccc",
+    borderRadius: "4px",
+    fontSize: "14px",
   },
   signInButton: {
-    width: '150px',
-    height: '40px',
-    margin: '30px',
-    border: '1px solid #000000',
-    borderRadius: '5px',
-    cursor: 'pointer',
-  }
+    padding: "10px 20px",
+    marginTop: "20px",
+    marginBottom: "10px",
+    backgroundColor: "#0047ab",
+    color: "white",
+    border: "none",
+    borderRadius: "4px",
+    cursor: "pointer",
+    fontWeight: "bold",
+    transition: "background-color 0.3s ease",
+  },
+  buttonGroup: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  error: {
+    color: "red",
+    fontWeight: "bold",
+  },
 };
