@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import SearchBar from "./SearchBar";
 import profilePic from "../assets/Profile.png";
 import logoImg from "../assets/logo.png";
@@ -16,6 +16,50 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [menuOpenProfile, setMenuOpenProfile] = useState(false);
   const [user, setUser] = useState(null); // null if not logged in
+  const navigate = useNavigate();
+
+  //ref for hamburger dropdown
+  const hamburgerRef = useRef(null);
+  const profileRef = useRef(null);
+
+  // ✅ auto-close after 5s
+  useEffect(() => {
+    let timer;
+    if (menuOpen) {
+      timer = setTimeout(() => {
+        setMenuOpen(false);
+      }, 3000);
+    }
+    return () => clearTimeout(timer);
+  }, [menuOpen]);
+
+  useEffect(() => {
+    let timer;
+    if (menuOpenProfile) {
+      timer = setTimeout(() => {
+        setMenuOpenProfile(false);
+      }, 3000);
+    }
+    return () => clearTimeout(timer);
+  }, [menuOpenProfile]);
+
+  // ✅ close when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (hamburgerRef.current && !hamburgerRef.current.contains(event.target)) {
+        setMenuOpen(false);
+      }
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setMenuOpenProfile(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -51,7 +95,7 @@ const Header = () => {
   }, []);
 
   // logout instructions
-  const navigate = useNavigate();
+  
 
   const handleLogout = () => {
     // clear stored user info
@@ -68,7 +112,7 @@ const Header = () => {
       <img src={logoImg} alt="Logo" style={styles.logoImage} />
       <img src={logoTxt} alt="LogoTxt" style={styles.logoText} />
 
-      <div>
+      <div ref={hamburgerRef}>
         <div style={{ position: "relative" }}>
           <img src={hamburgerImg} 
                 style={styles.hamburgerMenu} onClick={() => setMenuOpen(!menuOpen)} />
@@ -113,7 +157,7 @@ const Header = () => {
 
       {/* Profile menu only shows for logged-in users */}
       {user && (
-        <div style={{ position: "relative" }}>
+        <div ref={profileRef} style={{ position: "relative" }}>
           <button
             style={styles.menuButton} 
             onClick={() => setMenuOpenProfile(!menuOpenProfile)}>
