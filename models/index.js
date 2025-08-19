@@ -2,6 +2,7 @@
 const User = require('./user');
 const Video = require('./video');
 const VideoComment = require('./video_comment');
+const VideoLike = require('./video_like');
 const CommentThread = require('./comment_thread');
 const Playlist = require('./playlist');
 const PlaylistVideo = require('./playlist_video');
@@ -59,6 +60,10 @@ CommentThread.belongsTo(VideoComment, {
   foreignKey: 'video_comment_id',
 });
 
+//For likes
+User.belongsToMany(Video, { through: VideoLike, as: 'likedVideos', foreignKey: 'user_id' });
+Video.belongsToMany(User, { through: VideoLike, as: 'likers', foreignKey: 'video_id' });
+
 // A User can have many Playlists
 User.hasMany(Playlist, {
   foreignKey: 'user_id',
@@ -91,4 +96,4 @@ Video.belongsToMany(User, {
     foreignKey: 'video_id',
 });
 
-module.exports = { User, Video, VideoComment, CommentThread, Playlist, PlaylistVideo, ViewHistory };
+module.exports = { User, Video, VideoComment, CommentThread, Playlist, PlaylistVideo, ViewHistory, VideoLike };

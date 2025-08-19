@@ -8,6 +8,7 @@ const routes = require("./routes");
 const userRoutes = require("./routes/userRoutes.js");
 const Video = require("./models/video");
 const videoCommentRoutes = require("./routes/video_comment-routes.js")
+const videoLikeRoutes = require("./routes/videoLikeRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/user", userRoutes);
 app.use("/api/video-comments", videoCommentRoutes);
 app.use(routes);
+app.use("/api/video-likes", videoLikeRoutes);
 
 // Video routes
 app.post("/api/videos", async (req, res) => {
@@ -39,6 +41,18 @@ app.post("/api/videos", async (req, res) => {
 app.get("/api/videos", async (req, res) => {
   try {
     const videos = await Video.findAll();
+    res.json(videos);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch videos" });
+  }
+});
+
+//Likes
+app.get("/api/videos", async (req, res) => {
+  try {
+    const videos = await Video.findAll({
+      attributes: ["id", "title", "url", "description", "num_likes"], // <-- include this
+    });
     res.json(videos);
   } catch (err) {
     res.status(500).json({ error: "Failed to fetch videos" });

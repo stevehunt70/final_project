@@ -1,3 +1,5 @@
+import CommentsSection from "./CommentsSection";
+import LikeButton from "./LikeButton";
 import "../assets/css/VideoPage.css";
 
 const VideoPlayer = ({ video, comments }) => {
@@ -14,43 +16,22 @@ const VideoPlayer = ({ video, comments }) => {
         allowFullScreen
       ></iframe>
 
-      {/* Title + Likes row */}
       <div className="video-header">
         <h2 className="video-title">{video.title}</h2>
-        <div className="likes-container">
-          <span className="emoji">❤</span>
-          <span>{video.num_likes} Likes</span>
-        </div>
+
+        {/* like button */}
+        <LikeButton
+          key={video.id}
+          videoId={video.id}
+          initialLikes={video.num_likes ?? 0}
+          userId={1} 
+        />
       </div>
 
-      {/* Description */}
       <p className="video-description">{video.description}</p>
 
-      {/* Comments */}
-      <div className="comments-section">
-        <h3>Comments</h3>
-        
-        <div className="add-comment-box">
-          <input
-            type="text"
-            id="add_comment"
-            name="comment"
-            placeholder="Add a comment..."
-          />
-          <button>Comment</button>
-        </div>
-
-        {comments.length > 0 ? (
-          comments.map((c) => (
-          <div key={c.id} className="comment">
-            <strong>{c.author?.username || "Anonymous"}:</strong> {" "}
-            {c.comment_text}
-          </div>
-        ))
-      ) : (
-        <p>No comments yet.</p>
-      )}
-      </div>
+      {/* Comments section component */}
+      <CommentsSection videoId={video.id} initialComments={comments} />
     </div>
   );
 };
