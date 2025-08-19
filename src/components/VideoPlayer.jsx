@@ -59,10 +59,11 @@ const VideoPlayer = ({ video, comments }) => {
     <div className="main-video">
       <iframe
         width="100%"
-        height="700"
+        height="600"
         src={video.url}
         title={video.title}
         frameBorder="0"
+        align="center"
         allowFullScreen
       ></iframe>
 
