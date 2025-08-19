@@ -186,7 +186,7 @@ const styles = {
   logo: {
     width: "150px",
     height: "auto",
-    marginBottom: "-10px"
+    marginBottom: "-10px",
   },
   tagline: {
     fontSize: "16px",
@@ -204,10 +204,14 @@ const styles = {
     textTransform: "uppercase",
   },
   subtext: {
-    fontSize: "14px",
-    color: "#095b6bff",
-    margin: "2px 0",
-    letterSpacing: "1px",
+    textAlign: "center",
+    fontFamily: "Georgia",
+    fontSize: "18px",
+    color: "#1611a7ff",
+    margin: "6px 0",
+    fontWeight: "600",
+    letterSpacing: "2px",
+    textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
   },
   formContainer: {
     backgroundColor: "#ffffff",
