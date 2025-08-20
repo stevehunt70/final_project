@@ -59,7 +59,7 @@ const VideoPlayer = ({ video, comments, onLike }) => {
     <div className="main-video">
       <iframe
         width="100%"
-        height="600"
+        height="550"
         src={video.url}
         title={video.title}
         frameBorder="0"
