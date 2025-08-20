@@ -4,7 +4,7 @@
 }
 
 .main-video {
-  flex: 4;
+  flex: 5;
   display: flex;
   flex-direction: column;
 }
@@ -162,7 +162,7 @@
 
 /* VideoList.jsx list and its contents */
 .video-list {
-  flex: 1;
+  flex: 2;
   flex-direction: column;
 }
 
@@ -212,3 +212,18 @@
 .video-item.active {
   background-color: #ddd;
 }
+
+.show-more-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0;
+  margin-left: 4px;
+}
+
+.show-more-btn:hover {
+  text-decoration: underline;
+}
+
