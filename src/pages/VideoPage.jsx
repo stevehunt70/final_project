@@ -48,17 +48,41 @@ const VideoPage = () => {
     setComments(commentsData);
   };
 
+  // Handle like at the parent level
+  const handleLike = async (videoId) => {
+    try {
+      const res = await fetch(`/api/videos/${videoId}/like`, { method: "POST" });
+      const data = await res.json();
+
+      // update videos state (for sidebar sync)
+      setVideos(prev =>
+        prev.map(v => (v.id === videoId ? { ...v, num_likes: data.num_likes } : v))
+      );
+
+      // update selectedVideo if it's the liked one
+      if (selectedVideo?.id === videoId) {
+        setSelectedVideo(prev => ({ ...prev, num_likes: data.num_likes }));
+      }
+    } catch (err) {
+      console.error("Error liking video:", err);
+    }
+  };
+
   if (loading) return <p>Loading...</p>;
   if (!selectedVideo) return <p>Video not found.</p>;
 
   return (
     <div className="video-page">
-      {/* main video player flex-grow 4 */}
+      {/* main video player flex 4 */}
       <div className="main-video">
-        <VideoPlayer video={selectedVideo} comments={comments} />
+        <VideoPlayer
+          video={selectedVideo}
+          comments={comments}
+          onLike={handleLike}
+        />
       </div>
 
-      {/* sidebar list flex-grow 1 */}
+      {/* sidebar list flex 1 */}
       <div className="video-list">
         <VideoList
           videos={videos}
