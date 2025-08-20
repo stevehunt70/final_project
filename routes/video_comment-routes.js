@@ -56,7 +56,11 @@ router.get("/:id", async (req, res) => {
 router.post("/",  async (req, res) => {
   try {
     const commentData = await VideoComment.create(req.body);
-    res.status(200).json(commentData);
+
+    const newComment = await VideoComment.findByPk(commentData.id, {
+      include: [{model: User, attributes: ['username']}]
+    });
+    res.status(200).json(newComment);
   } catch (err) {
     res.status(400).json(err);
   }

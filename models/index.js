@@ -12,13 +12,13 @@ User.hasMany(Video, {
   foreignKey: 'user_id',
 });
 
-// A Video belongs to a single User
-Video.belongsTo(User, {
+// A User can have many VideoComments
+User.hasMany(VideoComment, {
   foreignKey: 'user_id',
 });
 
-// A User can have many VideoComments
-User.hasMany(VideoComment, {
+// A Video belongs to a single User
+Video.belongsTo(User, {
   foreignKey: 'user_id',
 });
 
@@ -32,19 +32,6 @@ Video.hasMany(VideoComment, {
   foreignKey: 'video_id'
 
 });
-
-// // A VideoComment belongs to a single User
-// VideoComment.belongsTo(User, {
-//   foreignKey: 'user_id',
-//   as: "author"
-// });
-
-// // A Video can have many VideoComments
-// Video.hasMany(VideoComment, {
-//   foreignKey: 'video_id',
-//   as: "comments"
-// });
-
 
 // A VideoComment belongs to a single Video
 VideoComment.belongsTo(Video, {
