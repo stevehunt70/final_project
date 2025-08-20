@@ -27,6 +27,7 @@ const VideoPage = () => {
         // fetch comments for that video
         const resComments = await fetch(`/api/video-comments?video_id=${id}`);
         const commentsData = await resComments.json();
+        console.log("Comments API response:", commentsData);
         setComments(commentsData);
       } catch (err) {
         console.error("Error fetching video page:", err);
@@ -45,6 +46,7 @@ const VideoPage = () => {
     // fetch its comments
     const resComments = await fetch(`/api/video-comments?video_id=${video.id}`);
     const commentsData = await resComments.json();
+    console.log("Comments API response:", commentsData);
     setComments(commentsData);
   };
 

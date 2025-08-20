@@ -96,11 +96,12 @@ const VideoPlayer = ({ video, comments, onLike }) => {
           <button onClick={handleAddComment}>Comment</button>
         </div>
 
+
         {localComments.length > 0 ? (
           localComments.map((c) => (
           <div key={c.id} className="comment-card">
             <div className="comment-header">
-              <strong>{c.author?.username || "Anonymous"}:</strong> {" "}
+              <strong>{c.user?.username || "Anonymous"}:</strong> {" "}
             </div>
             <div className="comment-body">
               {c.comment_text}
