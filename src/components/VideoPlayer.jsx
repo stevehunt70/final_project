@@ -1,23 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../assets/css/VideoPage.css";
 
-const VideoPlayer = ({ video, comments }) => {
+const VideoPlayer = ({ video, comments, onLike }) => {
 
   const [localComments, setLocalComments] = useState(comments || []);
   const [newComment, setNewComment] = useState("");
   const [likes, setLikes] = useState(video.num_likes);
 
+  // sync when props change
+  useEffect(() => {
+    setLocalComments(comments || []);
+    setLikes(video.num_likes);
+    setNewComment("");
+  }, [video, comments]);
+
   // Handle like button
   const handleLike = async () => {
-    try {
-      const res = await fetch(`/api/videos/${video.id}/like`, {
-        method: "POST",
-      });
-      const data = await res.json();
-      setLikes(data.num_likes); // update state
-    } catch (err) {
-      console.error("Error liking video:", err);
-    }
+    await onLike(video.id); //tell parent
+    setLikes(prev => prev + 1); //optimistic update
   };
 
   // Handle comment submission

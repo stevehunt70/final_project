@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
-import logo from "../assets/logo.png";
+import logoFull from "../assets/logoFull.png";
 
 export default function LoginRegister() {
   const navigate = useNavigate();
@@ -69,13 +69,10 @@ export default function LoginRegister() {
   return (
     <div style={styles.pageWrapper}>
       <div style={styles.logoSection}>
-        <img src={logo} alt="Office Insights Logo" style={styles.logo} />
-        <div style={styles.tagline}>
-          <p style={styles.title}>OFFICE INSIGHTS</p>
-        </div>
+        <img src={logoFull} alt="Office Insights Logo" style={styles.logo} />
       </div>
       <div style={styles.formContainer}>
-        <h2 align="center">Welcome to Office Insights</h2>
+        <h2 align="center">Welcome</h2>
         <div style={styles.signIn}>
           {error && <p style={styles.error}>{error}</p>}
 
@@ -159,8 +156,10 @@ export default function LoginRegister() {
         </div>
       </div>
       <div style={styles.tagline}>
+        <br />
         <br />      
-        <p style={styles.subtext}>SKILLS FOR TODAY, TOMORROW, THE FUTURE</p>
+        {/*<p style={styles.subtext}>SKILLS FOR</p>*/}
+        <p style={styles.subtext}>FOR TODAY - TOMORROW - THE FUTURE</p>
       </div>
     </div>
   );
@@ -177,13 +176,22 @@ const styles = {
     padding: "30px",
   },
   logoSection: {
+    display: "flex",
+    justifyContent: "center",
     textAlign: "center",
     marginBottom: "20px",
   },
   logo: {
-    width: "150px",
+    display: "block",
+    width: "350px",
     height: "auto",
     marginBottom: "-10px",
+  },
+  logoTxt: {
+    display: "block",
+    width: "200px",
+    height: "auto",
+    alignItems: "center",
   },
   tagline: {
     fontSize: "16px",
@@ -194,23 +202,23 @@ const styles = {
   },
   title: {
     fontSize: "28px",
-    fontWeight: "bold",
-    color: "#0047ab",
+    fontWeight: "600",
+    color: "#000000",
     marginBottom: "10px",
     letterSpacing: "1.5px",
     textTransform: "uppercase",
   },
   subtext: {
+    fontFamily: "'Nunito'",
     textAlign: "center",
-    fontFamily: "Georgia",
-    fontSize: "20px",
-    color: "#1611a7ff",
+    fontSize: "23px",
+    color: "#000000",
     margin: "16px 0",
     fontWeight: "600",
     letterSpacing: "2px",
-    textShadow: "1px 1px 2px rgba(0,0,0,0.3)",
   },
   formContainer: {
+    fontFamily: "'Nunito'",
     backgroundColor: "#ffffff",
     border: "1px solid #ddd",
     borderRadius: "8px",

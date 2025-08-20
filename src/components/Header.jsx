@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import SearchBar from "./SearchBar";
-import profilePic from "../assets/Profile.png";
+import profilePic from "../assets/ProfileGreen.png";
+import logoFull from "../assets/logoFull.png";
 import logoImg from "../assets/logo.png";
-import logoTxt from "../assets/logotxt.png";
 import usernameImg from "../assets/username.png";
 import emailImg from "../assets/email.png";
 import logoutImg from "../assets/logout.png";
@@ -109,8 +109,7 @@ const Header = () => {
   return (
     <header style={styles.header}>
       
-      <img src={logoImg} alt="Logo" style={styles.logoImage} />
-      <img src={logoTxt} alt="LogoTxt" style={styles.logoText} />
+      <img src={logoFull} alt="Logo" style={styles.logoImage} />
 
       <div ref={hamburgerRef}>
         <div style={{ position: "relative" }}>
@@ -119,7 +118,7 @@ const Header = () => {
           {menuOpen && (
             <div
               style={{
-                ...styles.dropdownMenu,
+                ...styles.dropdown,
                 position: "absolute",
                 top: "100%",
                 width: "200px",
@@ -127,7 +126,7 @@ const Header = () => {
                 left: 0,
                 zIndex: 1000,
               }}>
-            
+              <div style={styles.dropdownOverlay}></div>
               <div style={styles.dropdownContent}>
                 <hr />              
                 <div style={styles.profileText}>
@@ -222,6 +221,7 @@ const styles = {
     padding: "10px 16px",
     borderBottom: "1px solid #ccc",
     backgroundColor: "#f9f9f9",
+    fontFamily: "Nunito",
   },
   hamburgerMenu: {
     marginLeft: "40px",
@@ -263,7 +263,7 @@ const styles = {
   dropdown: {
     backgroundColor: "white",
     backgroundImage: `url(${logoImg})`,
-    backgroundSize: "cover",
+    backgroundSize: "contain",
     backgroundPosition: "center",
     backgroundRepeat: "no-repeat",
     border: "1px solid #ccc",
@@ -280,7 +280,7 @@ const styles = {
     left: 0,
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(255,255,255,0.6)", // white overlay with 60% opacity
+    backgroundColor: "rgba(255,255,255,0.75)", // white overlay with 60% opacity
     pointerEvents: "none", // allows clicks through overlay
     zIndex: 0,
   },
@@ -300,7 +300,7 @@ const styles = {
     justifyContent: "center",
   },
   logoImage: {
-    width: "100px",
+    width: "200px",
     height: "auto",
   },
   logoText: {
@@ -309,9 +309,7 @@ const styles = {
   },
   profileText: {
     color: "#2a0d83ff",
-    fontSize: "1rem",
-    fontWeight: "bold",
-    fontStyle: "italic",    
+    fontSize: "1rem", 
   },
   buttonHolder: {
     display: "flex",

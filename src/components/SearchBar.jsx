@@ -44,10 +44,17 @@ const styles = {
     width: "300px",
     padding: "8px",
     fontSize: "16px",
+    border: "none",
+    border: "1px solid #cccaaa",
+    borderRadius: "8px",
+    marginRight: "10px",
   },
   button: {
     padding: "8px 12px",
     cursor: "pointer",
+    border: "none",
+    border: "1px solid #cccaaa",
+    borderRadius: "8px",
   },
 };
 
