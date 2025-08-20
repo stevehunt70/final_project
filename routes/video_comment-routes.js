@@ -1,5 +1,6 @@
+// video_comment-routes.js
 const router = require("express").Router();
-const { VideoComment } = require("../models");
+const { VideoComment, User } = require("../models");
 
 // GET all video comments
 router.get("/", async (req, res) => {
@@ -8,14 +9,29 @@ router.get("/", async (req, res) => {
 
     if (video_id) {
       const comments = await VideoComment.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['username'] // fetch  username from User model
+        }
+      ],
         where: { video_id }
       });
       return res.status(200).json(comments);
     }
 
     // fallback: return all comments if no video_id specified
-    const comments = await VideoComment.findAll();
+    const comments = await VideoComment.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['username'] // fetch username from User model
+        }
+      ]
+    });
     res.status(200).json(comments);
+
+
   } catch (err) {
     res.status(400).json(err);
   }
@@ -25,7 +41,6 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const commentData = await VideoComment.findByPk(req.params.id);
-
     if (!commentData) {
       res.status(404).json({ message: "No video comment found with this id" });
       return;
