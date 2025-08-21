@@ -27,8 +27,6 @@ const styles = {
   footer: {
     background: "linear-gradient(to right, #f9dd51, #f89e5e, #f25656)",
     color: "black",
-    border: "1px solid black",
-    borderRadius: "8px",
     fontStyle: "italic",
     textAlign: "center",
     padding: "20px",

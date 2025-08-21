@@ -30,7 +30,6 @@ const VideoMain = () => {
 
   return (
     <div align="center">
-      <h2>Video Section</h2>
 
       {loading ? (
         <p>Loading videos...</p>
